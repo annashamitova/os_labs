@@ -10,15 +10,13 @@ boot:
     mov ax,3
     int 0x10
 
-    ; Очистить экран и заполнить атрибутом: фон = 7 (светлый/белый), текст = 4 (красный)
-    mov ah, 6        ; scroll up (0 = clear whole window)
+    mov ah, 6
     xor al, al
-    mov bh, 0xF4    ; атрибут: background=7 <<4, foreground=4 -> 0x74
+    mov bh, 0xF4
     mov cx, 0
     mov dx, 0x184F
     int 0x10
 
-    ; Установить цвет для teletype (AH=0Eh) — красный
     mov bh, 0
     mov bl, 0x04
 
