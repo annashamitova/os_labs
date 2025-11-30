@@ -1,0 +1,71 @@
+import java.util.Random;
+import java.util.Stack;
+
+public class BubbleSortStack {
+
+    // Пузырьковая сортировка Stack
+    public static void bubbleSort(Stack<Integer> stack) {
+        int n = stack.size();
+        boolean swapped;
+
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false;
+
+            for (int j = 0; j < n - i - 1; j++) {
+                if (stack.get(j) > stack.get(j + 1)) {
+
+                    int temp = stack.get(j);
+                    stack.set(j, stack.get(j + 1));
+                    stack.set(j + 1, temp);
+
+                    swapped = true;
+                }
+            }
+
+            if (!swapped) break;
+        }
+    }
+
+    // Генерация случайного стека
+    public static Stack<Integer> generateRandomStack(int size) {
+        Random rand = new Random();
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < size; i++) {
+            stack.push(rand.nextInt(1_000_000));
+        }
+
+        return stack;
+    }
+
+
+    public static long runExperiment(int size) {
+        Stack<Integer> stack = generateRandomStack(size);
+
+        long start = System.nanoTime();
+        bubbleSort(stack);
+        long end = System.nanoTime();
+
+        return end - start;
+    }
+
+    public static void main(String[] args) {
+
+        int[] sizes = {100, 1000, 5000, 10000};
+        int runs = 3;
+
+        System.out.println("=== Bubble Sort on Stack ===");
+        System.out.println("Size\tAverage Time (ms)");
+
+        for (int size : sizes) {
+            long total = 0;
+
+            for (int i = 0; i < runs; i++) {
+                total += runExperiment(size);
+            }
+
+            long avg = total / runs;
+            System.out.printf("%d\t%.3f\n", size, avg / 1_000_000.0);
+        }
+    }
+}
