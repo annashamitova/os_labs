@@ -40,10 +40,9 @@ public class BubbleSortArray {
 
     public static void main(String[] args) {
 
-        // Размеры — степени 10
-        int[] sizes = {100, 1000, 5000, 10000};
+        int[] sizes = {10, 100, 1000};
 
-        int runs = 3;
+        int runs = 100;
 
         System.out.println("=== Bubble Sort on Array ===");
         System.out.println("Size\tAverage Time (ms)");
